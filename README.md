@@ -10,7 +10,6 @@ Como usuário gostaria de poder me associar ao PharmaWeb através de um registro
 #### Critérios de aceitação
 - Para o registro é necessário informar:
     - Nome Completo;
-    - Data de nascimento;
     - E-mail (deve ser validado).
 - Todos os campos são obrigatórios;
 - Um pedido de confirmação deve ser enviado ao e-mail informado no registro;
