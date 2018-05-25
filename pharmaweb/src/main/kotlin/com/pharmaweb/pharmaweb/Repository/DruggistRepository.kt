@@ -1,8 +1,6 @@
-package com.pharmaweb.pharmaweb.Repository
+package com.pharmaweb.pharmaweb.repository
 
-import com.pharmaweb.pharmaweb.Model.Druggist
-import org.springframework.data.repository.reactive.ReactiveCrudRepository
-import org.springframework.stereotype.Repository
+import com.pharmaweb.pharmaweb.model.Druggist
+import org.springframework.data.jpa.repository.JpaRepository
 
-@Repository
-interface DruggistRepository : ReactiveCrudRepository<Druggist, String>
+interface DruggistRepository : JpaRepository<Druggist, Long>

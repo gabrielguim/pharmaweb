@@ -1,8 +1,6 @@
-package com.pharmaweb.pharmaweb.Repository
+package com.pharmaweb.pharmaweb.repository
 
-import com.pharmaweb.pharmaweb.Model.User
-import org.springframework.data.repository.reactive.ReactiveCrudRepository
-import org.springframework.stereotype.Repository
+import com.pharmaweb.pharmaweb.model.User
+import org.springframework.data.jpa.repository.JpaRepository
 
-@Repository
-interface UserRepository : ReactiveCrudRepository<User, String>
+interface UserRepository : JpaRepository<User, Long>
