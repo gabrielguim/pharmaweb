@@ -18,8 +18,8 @@ class UserService {
     fun register(user: User) = repository.save(user)
 
     fun findById(userId: Long): ResponseEntity<User> {
-        return repository.findById(userId).map { article ->
-            ResponseEntity.ok(article)
+        return repository.findById(userId).map { user ->
+            ResponseEntity.ok(user)
         }.orElse(ResponseEntity.notFound().build())
     }
 
@@ -35,8 +35,8 @@ class UserService {
     }
 
     fun delete(userId: Long): ResponseEntity<Void> {
-        return repository.findById(userId).map { article  ->
-            repository.delete(article)
+        return repository.findById(userId).map { user  ->
+            repository.delete(user)
 
             ResponseEntity<Void>(HttpStatus.OK)
         }.orElse(ResponseEntity.notFound().build())

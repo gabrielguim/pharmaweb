@@ -18,8 +18,8 @@ class DruggistService() {
     fun register(druggist: Druggist) = repository.save(druggist)
 
     fun findById(druggistId: Long): ResponseEntity<Druggist> {
-        return repository.findById(druggistId).map { article ->
-            ResponseEntity.ok(article)
+        return repository.findById(druggistId).map { druggist ->
+            ResponseEntity.ok(druggist)
         }.orElse(ResponseEntity.notFound().build())
     }
 
@@ -34,8 +34,8 @@ class DruggistService() {
     }
 
     fun delete(druggistId: Long): ResponseEntity<Void> {
-        return repository.findById(druggistId).map { article  ->
-            repository.delete(article)
+        return repository.findById(druggistId).map { druggist  ->
+            repository.delete(druggist)
 
             ResponseEntity<Void>(HttpStatus.OK)
         }.orElse(ResponseEntity.notFound().build())
