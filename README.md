@@ -1,18 +1,18 @@
 # PharmaWeb
-A simple app to manager users, druggists, pharmacy, orders, products...
+A simple app to manage users, druggists, pharmacy, orders, products...
 
 ## Backlog
 https://github.com/gabrielguim/pharmaweb/wiki
 
 ## Running the App
 
-Type the following command in your terminal to run the app
+Type the following command in your terminal to run the app or simply use your IDE (IntelliJ, Eclipse...)
 
 ```bash
 $ gradle bootRun
 ```
 
-The app will start running at <http://localhost:8080>.
+The app will start running at <http://localhost:8081>.
 
 ## Explore Rest API  
 
