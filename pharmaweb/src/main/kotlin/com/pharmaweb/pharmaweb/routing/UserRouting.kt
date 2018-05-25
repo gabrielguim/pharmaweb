@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/api/users/")
+@RequestMapping("/api/users")
 class UserRouting {
 
     @Autowired
@@ -19,14 +19,14 @@ class UserRouting {
     @PostMapping
     fun register(@Valid @RequestBody user: User) = userService.register(user)
 
-    @GetMapping("{id}")
-    fun findById(@PathVariable userId: Long) = userService.findById(userId)
+    @GetMapping("/{id}")
+    fun findById(@PathVariable(value = "id") userId: Long) = userService.findById(userId)
 
-    @PutMapping("{id}")
-    fun alter(@PathVariable userId: Long,
+    @PutMapping("/{id}")
+    fun alter(@PathVariable(value = "id") userId: Long,
               @Valid @RequestBody newUser: User) = userService.alter(userId, newUser)
 
-    @DeleteMapping("{id}")
-    fun delete(@PathVariable userId: Long) = userService.delete(userId)
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable(value = "id") userId: Long) = userService.delete(userId)
 
 }

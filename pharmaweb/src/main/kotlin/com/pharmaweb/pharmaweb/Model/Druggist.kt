@@ -4,6 +4,7 @@ import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 
 @Entity
@@ -16,7 +17,7 @@ data class Druggist(
         @get: NotBlank
         val fullName: String  = "",
 
-        @get: NotBlank
+        @get: Email
         val email: String = "",
 
         @get: NotBlank
