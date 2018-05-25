@@ -18,7 +18,7 @@ class ProductService() {
 
     fun register(product: Product) = repository.save(product)
 
-    fun searchByText(textToSeach: String) = repository.searchByText(Normalizer.normalize(textToSeach, Normalizer.Form.NFD))
+    fun searchByText(textToSeach: String) = repository.searchByText(textToSeach)
 
     fun findById(productId: String): ResponseEntity<Product> {
         return repository.findById(productId).map { product ->

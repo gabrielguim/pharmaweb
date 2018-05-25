@@ -15,7 +15,9 @@ class ProductRouting {
 
     @GetMapping
     fun getAll() : List<Product> {
-        var products: MutableList<Product> = mutableListOf()
+
+        // Product Mock
+        val products: MutableList<Product> = mutableListOf()
         for (i in 0..10) {
             products.add(productService.register(Product("${i}", "name ${i}", "desc ${i}", "url ${i}", "dep ${i}", "cat ${i}", i * 1f)))
         }
