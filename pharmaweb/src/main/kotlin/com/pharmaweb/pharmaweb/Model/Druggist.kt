@@ -7,7 +7,7 @@ import javax.persistence.Id
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 
-@Entity
+@Entity(name = "druggist")
 data class Druggist(
 
         @Id
