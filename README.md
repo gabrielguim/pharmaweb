@@ -2,7 +2,7 @@
 A simple app to manager users, druggists, pharmacy, orders, products...
 
 ## Backlog
-Click [here] (https://github.com/gabrielguim/pharmaweb/wiki)
+https://github.com/gabrielguim/pharmaweb/wiki
 
 ## Running the App
 
@@ -34,8 +34,8 @@ The app defines following CRUD APIs.
 
     DELETE /api/[entity.endpoint]/{id}
     
-The app defines also search API for Procut
+The app defines also search API for Product
 
     GET /api/products/?q={text}
 
-You can test them using postman or any other rest client.
+You can test them using Postman or any other rest client.
