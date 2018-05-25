@@ -14,10 +14,20 @@ class ProductRouting {
     lateinit var productService: ProductService
 
     @GetMapping
-    fun getAll() = productService.getAll()
+    fun getAll() : List<Product> {
+        var products: MutableList<Product> = mutableListOf()
+        for (i in 0..10) {
+            products.add(productService.register(Product("${i}", "name ${i}", "desc ${i}", "url ${i}", "dep ${i}", "cat ${i}", i * 1f)))
+        }
+
+        return products // productService.getAll()
+    }
 
     @PostMapping
     fun register(@Valid @RequestBody product: Product) = productService.register(product)
+
+    @GetMapping("/")
+    fun searchByText(@RequestParam("q") textToSearch: String) = productService.searchByText("%${textToSearch.toLowerCase()}%")
 
     @GetMapping("/{id}")
     fun findById(@PathVariable(value = "id") productId: String) = productService.findById(productId)

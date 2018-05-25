@@ -1,13 +1,11 @@
 package com.pharmaweb.pharmaweb.model
 
 import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
 import javax.persistence.Id
-import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
+import javax.validation.constraints.PositiveOrZero
 
-@Entity
+@Entity(name = "product")
 data class Product(
 
         @Id
@@ -17,15 +15,18 @@ data class Product(
         val name: String  = "",
 
         @get: NotBlank
-        val department: MutableList<String> = mutableListOf(),
+        val description: String  = "",
+
+        @get: NotBlank
+        val imageUrl: String  = "",
+
+        @get: NotBlank
+        val department: String = "",
 
         @get: NotBlank
         val category: String = "",
 
-        @get: NotBlank
-        val price: Float = 0f,
-
-        @get: NotBlank
-        val discount: Float = 0f
+        @get: PositiveOrZero
+        val price: Float = 0f
 
 )

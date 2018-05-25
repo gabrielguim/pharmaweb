@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
+import java.text.Normalizer
 
 @Service
 class ProductService() {
@@ -16,6 +17,8 @@ class ProductService() {
     fun getAll() = repository.findAll().toList()
 
     fun register(product: Product) = repository.save(product)
+
+    fun searchByText(textToSeach: String) = repository.searchByText(Normalizer.normalize(textToSeach, Normalizer.Form.NFD))
 
     fun findById(productId: String): ResponseEntity<Product> {
         return repository.findById(productId).map { product ->
