@@ -33,10 +33,16 @@ Como usuário quero poder buscar produtos na loja por vários critérios (nome, 
 #### Critérios de aceitação
 - A busca deve retornar apenas resultados em que seus pelo menos um dos seus campos sejam correspondentes ao texto informado na busca
 
-### US.5 - Pedido de produtos
+### US.5 - Autenticação
+Como usuário registrado quero poder me autenticar com o sistema
+
+#### Critérios de aceitação
+- O resultado da autenticação deve produzir um token que será usado nas operações que o usuário for fazer
+
+### US.6 - Pedido de produtos
 Como usuário quero poder efetuar um pedido com os produtos selecionados
 
 #### Critérios de aceitação
+- Um pedido só poderá ser efetuado se o usuário que o faz estiver autenticado com o sistema
 - O pedido deve ser efetuado e enviado para a farmácia responsável
 - Um pedido pode conter vários produtos
-
