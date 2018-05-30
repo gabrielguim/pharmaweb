@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "pharmaweb-35ccb",
+  "private_key_id": "7f03515a1cf8f991c8cc9fb8bcaec653cf4d4d0f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCwVVX+CE6clftt\nkSCZxxqAC4woCUoRO18Ypi/hoVN1tsMR1wj4IOp5EUUDin8dLNa5Zw1oWRiCBavR\nDg0jVuq4zaxBM84pB/pGfL8tXYN4nOaris+Qunf8wb1E5ift0lHHexLgypa3kcFT\nlS7oPRsHuAqmPKmf9xja9VbLQYIdNBZ8RpQZyBufHaO+dXZl5hd3V+fFC9gl+G9Z\n6MyXwbzJ1lMWNcYqDhfuoZwHmQXxS7yZma3G8C388NpSjQbGS9XeXiaexVyUQT+I\nykVDssqJLMGirfWuXLmMFk7IzmOXjqCN18t6t+45hFzZwWicag3UYgrzBjhNcER2\neO4YMnRfAgMBAAECggEAAnHhyViQI8z95B0DrgjRWJPQaQBdTd6G3llKMf9XSuXd\nJTLYEFNUgkKNCb7dLahg1HKWAFZhPUbwL5aESXMmZKg6tS9ksl5GnWeUDFWkQa3b\nPOb7IxnoGVG5BWreLtv1qlBjM0lbzEZxvxjtwjvmqLVn4GTYQpGIf1tbeAymeIUp\ny3SBuoA08m6Q84anqVUNNdhpEjgZm9Fzkunq4caHU+BgC9RPOz3AXD62l7VmXR+A\nQLaZzuF4DlkcIqyJ6n1YueuI6eC/m2sQOEMZCYQPVKhKdHEwxiH0+0ln/H4ZTPn+\nSCrVD60MVHJPfRR4zsZGL/uEPxRs1/f51TxNIx5S8QKBgQDiFpigvpDrr4EhheB6\n7G3iFCpVlVdz/QM7VOXiujH2cfE9dde8H5UtDjOGTH2Nn34TfEJPwmujCGrM0Sth\nKol1MBUGMosot23uiiScjAdHCxVz923JQIVDoCWxIdJRi/GtjVsBRJTRqtHGyZ8H\nPepnlP2LrPvZ41yI9kmznZ4CuwKBgQDHqZXzossoblcAORGMedUG7kW6xCEAEw9L\nNNx3wb4LKNXkjCuXmMBm1uygyZJXHaCSU/HMCfr7UttgBQq1GH4LPbUToOmVq52D\nhVG2cX3SjQkXXrg5ZD6i1gsdlj6eC2+0mZ+Q+IBE5LoeB4FzDH3gNkXRXwTxjhh7\n3R44M1wUrQKBgACA8GIbSpNb1rvOYoujjzMbvGRoasN1YtZ0//YbWBUmd9UdOBfR\nMjHhgDfiX707B7rfYf5vfnHkiOhf5urWf2vlaYaUAj9a+UG4yRAYN8PuwGN7v6Dd\nJe7aonrcim1oFGfAkt1T28kDymfY9yO6/ZSxfkcbYYxAt2oOsmdWCI4VAoGAS6b2\nKlqEn80vKeZ1v8Rp8zZVNW8bEewm31goMTg3ygKvCOoTml1GibDl+AZobJnNPaSQ\n+b7OWmwKs1c1t2iQWbIH6mgOGaftBuh9DaPzCNRnnXNGWnihQxHXJF7JWxj6OnP7\nAfMmpvQDkV1Gr1EMYOgvjCV0uhIdNNGTobfULAECgYARlcV0FMukDqVhsd0dBiSe\n422z6Eueh5KqSjjCX1pI81OWMGEoDUw7dbhA4N9+EVwWKL7VvqV9W4vRsfQH0jKq\nm+kgzzWKGSQBXRZtVOGgUhKrlDvoXAzlR2yeSSMGpghX6NlJZtq3YDzAJ21GMK4o\nqmDorC0Niqm/5XV0CwLv7w==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-batdp@pharmaweb-35ccb.iam.gserviceaccount.com",
+  "client_id": "116311044132808940230",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-batdp%40pharmaweb-35ccb.iam.gserviceaccount.com"
+}

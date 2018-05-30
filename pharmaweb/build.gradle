@@ -52,6 +52,7 @@ dependencies {
 
 	compile("javax.xml.bind:jaxb-api")
 
+	compile("com.google.firebase:firebase-admin:6.1.0")
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
