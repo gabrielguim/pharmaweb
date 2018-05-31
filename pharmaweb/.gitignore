@@ -18,6 +18,9 @@
 *.ipr
 /out/
 
+### API Keys
+/src/main/resources/pharmaweb-firebase-key.json
+
 ### NetBeans ###
 /nbproject/private/
 /build/
