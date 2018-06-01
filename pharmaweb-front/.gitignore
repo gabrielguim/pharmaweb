@@ -10,7 +10,7 @@
 /build
 
 # firebase keys
-/src/firebase/firebase-config.json
+/src/firebase/firebase-config.js
 
 # misc
 .DS_Store
