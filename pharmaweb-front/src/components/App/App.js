@@ -1,7 +1,6 @@
 import React from 'react';
-import Router from '../../router/Router'
-
-import Navigation from '../Navigation/Navigation';
+import Router from '../../router/router'
+import Navigation from '../navigation/navigation';
 
 const App = () =>
   <div>

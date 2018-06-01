@@ -2,8 +2,8 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import * as routes from './routes';
 
-import LandingPage from '../components/Landing/Landing';
-import HomePage from '../components/Home/Home';
+import LandingPage from '../components/landing/landing';
+import HomePage from '../components/home/home';
 
 // Stateless component to making the App.js more clear,
 // without using many, many and... many
