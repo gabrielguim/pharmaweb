@@ -31,8 +31,8 @@ class ListItems extends React.Component {
     const headers = {
       headers: {
         'Content-Type': 'application/json',
-        token: token,
-        uid: uid
+        'token': token,
+        'uid': uid
       }
     };
 
