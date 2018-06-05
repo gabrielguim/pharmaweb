@@ -1,11 +1,12 @@
 import React from 'react';
-import Router from '../../router/router'
+import { BrowserRouter } from 'react-router-dom';
+import withAuthentication from '../../session/withAuthentication';
+
 import Navigation from '../navigation/navigation';
 
 const App = () =>
-  <div>
+  <BrowserRouter>
     <Navigation />
-    <Router />
-  </div>
+  </BrowserRouter>
 
-export default App;
+export default withAuthentication(App);

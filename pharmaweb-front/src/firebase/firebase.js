@@ -3,5 +3,5 @@ import * as firebase from './firebase-init';
 
 export {
   auth,
-  firebase
+  firebase,
 };

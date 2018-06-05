@@ -1,11 +1,11 @@
 import React from 'react';
 import withAuthorization from '../../session/withAuthorization';
 
-const Landing = () =>
+const TableList = () =>
   <div>
-    Landing
+    TABLE LIST
   </div>
 
 const authCondition = (authUser) => !!authUser;
 
-export default withAuthorization(authCondition)(Landing);
+export default withAuthorization(authCondition)(TableList);
