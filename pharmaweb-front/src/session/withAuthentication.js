@@ -15,6 +15,18 @@ const withAuthentication = (Component) =>
 
     componentDidMount() {
       firebase.auth.onAuthStateChanged(authUser => {
+
+        if (authUser) {
+          authUser.getIdToken().then(function(data) {
+            const uid = authUser.uid;
+            const token = data;
+
+            localStorage.setItem('I', uid);
+            localStorage.setItem('F', token);
+
+          });
+        }
+
         authUser
           ? this.setState(() => ({ authUser }))
           : this.setState(() => ({ authUser: null }));

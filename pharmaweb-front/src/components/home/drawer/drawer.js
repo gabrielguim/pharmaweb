@@ -37,6 +37,9 @@ class CDrawer extends React.Component {
   };
 
   logout = () => {
+    localStorage.removeItem('I');
+    localStorage.removeItem('F');
+
     auth.doSignOut()
   };
 

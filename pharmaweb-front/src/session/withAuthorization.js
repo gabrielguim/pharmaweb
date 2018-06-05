@@ -10,6 +10,17 @@ const withAuthorization = (condition) => (Component) => {
       firebase.auth.onAuthStateChanged(authUser => {
         var currentLocation = this.props.location.pathname;
 
+        if (authUser) {
+          authUser.getIdToken().then(function(data) {
+            const uid = authUser.uid;
+            const token = data;
+
+            localStorage.setItem('I', uid);
+            localStorage.setItem('F', token);
+
+          });
+        }
+
         if (!condition(authUser)) {
           if (currentLocation === "/sign-up") this.props.history.push("/sign-up");
           else this.props.history.push("/sign-in");

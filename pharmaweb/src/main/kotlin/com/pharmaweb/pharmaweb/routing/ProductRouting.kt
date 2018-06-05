@@ -19,10 +19,14 @@ class ProductRouting {
         // Product Mock
         val products: MutableList<Product> = mutableListOf()
         for (i in 0..10) {
-            products.add(productService.register(Product("${i}", "name ${i}", "desc ${i}", "url ${i}", "dep ${i}", "cat ${i}", i * 1f)))
+            if (i % 2 == 0) {
+                productService.register(Product("${i}", "name ${i}", "desc 1", "url ${i}", "dep ${i}", "cat ${i}", i * 1f))
+            } else {
+                productService.register(Product("${i}", "name ${i}", "desc ${i}", "url ${i}", "dep 1", "cat ${i}", i * 1f))
+            }
         }
 
-        return products // productService.getAll()
+        return productService.getAll()
     }
 
     @PostMapping
@@ -30,6 +34,9 @@ class ProductRouting {
 
     @GetMapping("/")
     fun searchByText(@RequestParam("q") textToSearch: String) = productService.searchByText("%${textToSearch.toLowerCase()}%")
+
+    @GetMapping("/group/")
+    fun groupBy(@RequestParam("by") group: String) = productService.groupBy(group)
 
     @GetMapping("/{id}")
     fun findById(@PathVariable(value = "id") productId: String) = productService.findById(productId)

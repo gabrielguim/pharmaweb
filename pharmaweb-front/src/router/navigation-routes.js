@@ -12,7 +12,7 @@ const dashboardRoutes = [
     icon: Dashboard,
   },
   {
-    path: "/list",
+    path: "/products",
     sidebarName: "Table List",
     navbarName: "Table List",
     icon: ContentPaste

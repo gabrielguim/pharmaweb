@@ -85,7 +85,35 @@ class SignUp extends React.Component {
 
     auth.doCreateUserWithEmailAndPassword(email, password)
       .then(authUser => {
-        history.push("/");
+        const uid = authUser.user.uid;
+
+        authUser.getIdToken().then(function(data) {
+          const token = data;
+
+          const user = {
+            'uid': uid,
+            'email': email,
+            'fullName': fullName
+          };
+
+          const headers = {
+            headers: {
+              'Content-Type': 'application/json',
+              'token': token,
+              'Cache-Control': 'no-cache',
+              'uid': uid
+            }
+          };
+
+          axios.post('http://localhost:8081/api/users', user, headers)
+            .then(res => {
+              console.log(res);
+              history.push("/");
+            }).catch(error => {
+              console.log(error);
+            });
+
+        });
       })
       .catch(error => {
         this.setState({ error: error.message });
