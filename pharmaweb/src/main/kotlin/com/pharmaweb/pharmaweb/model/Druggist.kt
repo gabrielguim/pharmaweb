@@ -15,6 +15,9 @@ data class Druggist(
         val id: Long = 0,
 
         @get: NotBlank
+        val uid: String  = "",
+
+        @get: NotBlank
         val fullName: String  = "",
 
         @get: Email
