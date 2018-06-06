@@ -10,15 +10,18 @@ import org.springframework.stereotype.Component
 import org.springframework.web.servlet.HandlerInterceptor
 
 @Component
-class AppInterceptor: HandlerInterceptor{
+class AppInterceptor: HandlerInterceptor {
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, dataObject: Any) : Boolean {
-        val firebaseToken = request.getHeader("token")
-        val uid = request.getHeader("uid")
+        if (request.headerNames.toList().contains("access-control-request-headers")) { // CORS
+            return true
+        } else {
+            val firebaseToken = request.getHeader("token")
+            val uid = request.getHeader("uid")
 
-        val authTask: FirebaseToken = FirebaseAuth.getInstance().verifyIdTokenAsync(firebaseToken, true).get()
+            val authTask: FirebaseToken = FirebaseAuth.getInstance().verifyIdTokenAsync(firebaseToken, true).get()
 
-        return uid == authTask.uid
+            return uid == authTask.uid
+        }
     }
-
 }

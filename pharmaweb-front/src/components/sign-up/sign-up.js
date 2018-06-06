@@ -72,6 +72,29 @@ class SignUp extends React.Component {
     );
   };
 
+  async registerUser(history, user) {
+    auth.doCheckToken().then(function(data) {
+      const token = data;
+
+      const headers = {
+        headers: {
+          'Content-Type': 'application/json',
+          'token': token,
+          'uid': user.uid
+        }
+      };
+
+      localStorage.setItem('I', user.uid);
+      localStorage.setItem('F', token);
+
+      axios.post('http://localhost:8081/api/users', user, headers)
+        .catch(error => {
+          auth.doSignOut();
+          history.push("/sign-in");
+        });
+    });
+  }
+
   register = () => {
     const {
       fullName,
@@ -83,12 +106,21 @@ class SignUp extends React.Component {
       history,
     } = this.props;
 
+    this.setState({ loading: true });
     auth.doCreateUserWithEmailAndPassword(email, password)
       .then(authUser => {
-        history.push("/");
+        const uid = authUser.user.uid;
+        const user = {
+          'uid': uid,
+          'email': email,
+          'fullName': fullName
+        };
+
+        this.registerUser(history, user);
+
       })
       .catch(error => {
-        this.setState({ error: error.message });
+        this.setState({ error: error.message, loading: false });
       });
 
   }
@@ -99,7 +131,7 @@ class SignUp extends React.Component {
         <div className={classes.margin}>
           <TextField
             id="name"
-            label="Full Name"
+            label="Nome Completo"
             value={this.state.fullName}
             onChange={this.handleChange('fullName')}
             margin="normal"
@@ -117,7 +149,7 @@ class SignUp extends React.Component {
           />
         </div>
         <FormControl fullWidth className={classes.marginPass}>
-          <InputLabel htmlFor="adornment-password">Password</InputLabel>
+          <InputLabel htmlFor="adornment-password">Senha</InputLabel>
           <Input
             id="adornment-password"
             type={this.state.showPassword ? 'text' : 'password'}
@@ -136,7 +168,7 @@ class SignUp extends React.Component {
           />
         </FormControl>
         <FormControl fullWidth className={classes.marginPass}>
-          <InputLabel htmlFor="adornment-c-password">Confirm Password</InputLabel>
+          <InputLabel htmlFor="adornment-c-password">Confirmar Senha</InputLabel>
           <Input
             id="adornment-c-password"
             type={this.state.showCPassword ? 'text' : 'password'}
@@ -159,7 +191,7 @@ class SignUp extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, history } = this.props;
 
     const {
       fullName,
@@ -188,15 +220,18 @@ class SignUp extends React.Component {
             <Card className={classes.card}>
               <CardContent>
                 <Typography className={classes.title} color="textSecondary">
-                  Sign Up
+                  REGISTRAR
                 </Typography>
                 { this.linearProgress() }
                 { this.registerForm(classes) }
               </CardContent>
               <CardActions>
+              <Button className={classNames(classes.margin)} color="secondary" onClick={ () => { history.push("/sign-in"); } }>
+                VOLTAR
+              </Button>
                 <div className={classNames(classes.sign_in, classes.margin)}>
                   <Button color="primary" disabled={isInvalid} onClick={ () => { this.register() } }>
-                    REGISTER
+                    REGISTRAR
                   </Button>
                 </div>
               </CardActions>

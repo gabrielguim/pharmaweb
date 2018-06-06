@@ -20,6 +20,11 @@ class ProductService() {
 
     fun searchByText(textToSeach: String) = repository.searchByText(textToSeach)
 
+    fun groupBy(group: String) = repository.findAll().groupBy {
+        if (group.equals("category")) { it.category }
+        else { it.department }
+    }
+
     fun findById(productId: String): ResponseEntity<Product> {
         return repository.findById(productId).map { product ->
             ResponseEntity.ok(product)
