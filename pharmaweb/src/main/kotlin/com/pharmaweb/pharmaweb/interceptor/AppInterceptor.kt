@@ -10,23 +10,18 @@ import org.springframework.stereotype.Component
 import org.springframework.web.servlet.HandlerInterceptor
 
 @Component
-class AppInterceptor: HandlerInterceptor{
-
-    val logger = LoggerFactory.getLogger(AppInterceptor::class.java)
+class AppInterceptor: HandlerInterceptor {
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, dataObject: Any) : Boolean {
-        val firebaseToken = request.getHeader("token")
-        val uid = request.getHeader("uid")
+        if (request.headerNames.toList().contains("access-control-request-headers")) { // CORS
+            return true
+        } else {
+            val firebaseToken = request.getHeader("token")
+            val uid = request.getHeader("uid")
 
+            val authTask: FirebaseToken = FirebaseAuth.getInstance().verifyIdTokenAsync(firebaseToken, true).get()
 
-        logger.info("TOOOOOOOOOOOOOOOOOOOOOOKEN DESSA MERDA - " +  request.headerNames.toList().toString())
-        logger.info("TOOOOOOOOOOOOOOOOOOOOOOKEN DESSA MERDA - " +  request.getHeaders("access-control-request-headers").toList().toString())
-        logger.info("TOOOOOOOOOOOOOOOOOOOOOOKEN DESSA MERDA - " +  firebaseToken)
-        logger.info("UUUUUUUUUUUUUUUID DESSA MERDA - " +  uid)
-
-        val authTask: FirebaseToken = FirebaseAuth.getInstance().verifyIdTokenAsync(firebaseToken, true).get()
-
-        return uid == authTask.uid
+            return uid == authTask.uid
+        }
     }
-
 }

@@ -4,7 +4,6 @@ import withAuthorization from '../../session/withAuthorization';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 
 import ListItems from './list-items/list-items'
 
@@ -49,7 +48,7 @@ class TableList extends React.Component {
             <Tab label="Departments" />
           </Tabs>
         </AppBar>
-        {value === 0 && <TabContainer> </TabContainer>}
+        {value === 0 && <TabContainer></TabContainer>}
         {value === 1 && <TabContainer>/group/?by=category</TabContainer>}
         {value === 2 && <TabContainer>/group/?by=department</TabContainer>}
       </div>

@@ -1,16 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import listItemsStyle from './list-items-style'
-import { firebase } from '../../../firebase/firebase';
 
 import { withStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
+
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Fade from '@material-ui/core/Fade';
+import CustomList from './custom-list';
 
 import axios from 'axios';
 
@@ -19,14 +15,29 @@ class ListItems extends React.Component {
   state = {
       token: '',
       value: 0,
+      list: [],
+      loading: false
+  };
+
+  linearProgress = () => {
+    const { loading } = this.state;
+    return (
+      <div className={this.props.classes.loadingProgress}>
+        <Fade
+          in={loading}
+          style={{
+            transitionDelay: loading ? '200ms' : '200ms',
+          }}
+          unmountOnExit>
+          <LinearProgress color="secondary" />
+        </Fade>
+      </div>
+    );
   };
 
   getProducts = (query) => {
     const uid = localStorage.getItem('I');
     const token = localStorage.getItem('F');
-
-    console.log(headers);
-    console.log(query);
 
     const headers = {
       headers: {
@@ -36,45 +47,31 @@ class ListItems extends React.Component {
       }
     };
 
-    axios.get('http://localhost:8081/api/products', headers)
+    this.setState({ loading: true });
+    axios.get('http://localhost:8081/api/products' + query, headers)
       .then(res => {
-        console.log(res);
+        this.setState({ list: res.data,
+                        loading: false })
       }).catch(error => {
+        this.setState({ loading: false })
         console.log(error);
       });
   };
 
+  componentWillMount = () => {
+    this.getProducts(this.props.children ? this.props.children : "");
+  }
+
   render() {
     const { classes } = this.props;
 
-    console.log(this.props);
-
-    this.getProducts(this.props.children);
-
     return (
-      <div className={classes.root}>
-        XISDE
+      <div>
+        { this.linearProgress() }
+        <div className={classes.root}>
+          <CustomList list={this.state.list} { ... this.props } />
+        </div>
       </div>
-        // <GridList cellHeight={180} className={classes.gridList}>
-        //   <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-        //     <ListSubheader component="div">December</ListSubheader>
-        //   </GridListTile>
-        //   {tileData.map(tile => (
-        //     <GridListTile key={tile.img}>
-        //       <img src={tile.img} alt={tile.title} />
-        //       <GridListTileBar
-        //         title={tile.title}
-        //         subtitle={<span>by: {tile.author}</span>}
-        //         actionIcon={
-        //           <IconButton className={classes.icon}>
-        //             <InfoIcon />
-        //           </IconButton>
-        //         }
-        //       />
-        //     </GridListTile>
-        //   ))}
-        // </GridList>
-
     );
   };
 

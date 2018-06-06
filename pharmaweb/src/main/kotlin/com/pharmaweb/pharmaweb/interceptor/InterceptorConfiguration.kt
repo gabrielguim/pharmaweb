@@ -3,10 +3,12 @@ package com.pharmaweb.pharmaweb.interceptor
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry
+import org.springframework.web.servlet.config.annotation.EnableWebMvc
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
+@EnableWebMvc
 class InterceptorConfiguration: WebMvcConfigurer {
 
     @Autowired
@@ -17,7 +19,9 @@ class InterceptorConfiguration: WebMvcConfigurer {
     }
 
     override fun addCorsMappings(registry: CorsRegistry) {
-        registry.addMapping("/**")
+        registry.addMapping("/api/**")
+                .allowedOrigins("*")
+                .allowedMethods("POST", "GET",  "PUT", "OPTIONS", "DELETE")
     }
 
 }

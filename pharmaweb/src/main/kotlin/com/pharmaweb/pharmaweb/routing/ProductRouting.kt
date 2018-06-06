@@ -4,6 +4,7 @@ import com.pharmaweb.pharmaweb.model.Product
 import com.pharmaweb.pharmaweb.service.ProductService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import java.util.*
 import javax.validation.Valid
 
 @RestController
@@ -16,14 +17,17 @@ class ProductRouting {
     @GetMapping
     fun getAll() : List<Product> {
 
+        fun ClosedRange<Int>.random() =
+                Random().nextInt(endInclusive - start) +  start
+
         // Product Mock
         val products: MutableList<Product> = mutableListOf()
-        for (i in 0..10) {
-            if (i % 2 == 0) {
-                productService.register(Product("${i}", "name ${i}", "desc 1", "url ${i}", "dep ${i}", "cat ${i}", i * 1f))
-            } else {
-                productService.register(Product("${i}", "name ${i}", "desc ${i}", "url ${i}", "dep 1", "cat ${i}", i * 1f))
-            }
+        for (i in 0..100) {
+            val dep = (1..10).random()
+            val cat = (1..10).random()
+            productService.register(Product("${i}", "name ${i}", "desc ${i}",
+                    "https://media.alienwarearena.com/media/1327-a.jpg",
+                    "dep ${dep}", "cat ${cat}", i * 1f))
         }
 
         return productService.getAll()
