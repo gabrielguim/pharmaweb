@@ -1,6 +1,9 @@
 import React from "react";
 import withAuthorization from '../../session/withAuthorization';
 
+import listItemsStyle from './list-items/list-items-style'
+import { withStyles } from '@material-ui/core/styles';
+
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -31,21 +34,21 @@ class TableList extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     const { value } = this.state;
 
     return (
       <div>
-        <AppBar position="static" color="default">
+        <AppBar className={classes.appBar} color="default">
           <Tabs
             value={this.state.value}
             onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
+            classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
             centered
             fullWidth>
-            <Tab label="All" />
-            <Tab label="Categories" />
-            <Tab label="Departments" />
+            <Tab label="All" classes={{ root: classes.tabRoot, selected: classes.tabSelected }} />
+            <Tab label="Categories" classes={{ root: classes.tabRoot, selected: classes.tabSelected }} />
+            <Tab label="Departments" classes={{ root: classes.tabRoot, selected: classes.tabSelected }} />
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer></TabContainer>}
@@ -58,4 +61,4 @@ class TableList extends React.Component {
 
 const authCondition = (authUser) => !!authUser;
 
-export default withAuthorization(authCondition)(TableList);
+export default withAuthorization(authCondition)(withStyles(listItemsStyle)(TableList));

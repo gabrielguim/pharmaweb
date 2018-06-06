@@ -27,13 +27,6 @@ import { auth } from '../../firebase/firebase';
 
 import signInStyle from './sign-in-style'
 
-const INITIAL_STATE = {
-  email: '',
-  password: '',
-  showPassword: false,
-  error: null,
-};
-
 class SignIn extends React.Component {
 
   state = {
@@ -44,22 +37,27 @@ class SignIn extends React.Component {
     loading: false
   };
 
+  async getAsyncToken(user) {
+    console.log(user);
+    auth.doCheckToken().then(function(data) {
+      const uid = user.uid;
+      const token = data;
+
+      localStorage.setItem('I', uid);
+      localStorage.setItem('F', token);
+    });
+  }
+
   authWithFirebase = () => {
     const {
       email,
       password,
     } = this.state;
 
-    const {
-      history,
-    } = this.props;
-
     this.setState({ loading: true });
     auth.doSignInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState(() => ({ ...INITIAL_STATE }));
-        history.push("/");
-        this.setState({ loading: false });
+      .then((authUser) => {
+        this.getAsyncToken(authUser.user);
       })
       .catch(error => {
         this.setState({
@@ -113,7 +111,7 @@ class SignIn extends React.Component {
           />
         </div>
         <FormControl fullWidth className={classes.marginPass}>
-          <InputLabel htmlFor="adornment-password">Password</InputLabel>
+          <InputLabel htmlFor="adornment-password">Senha</InputLabel>
           <Input
             id="adornment-password"
             type={this.state.showPassword ? 'text' : 'password'}
@@ -160,7 +158,7 @@ class SignIn extends React.Component {
             <Card className={classes.card}>
               <CardContent>
                 <Typography className={classes.title} color="textSecondary">
-                  Sign In
+                  Entrar
                 </Typography>
                 { this.linearProgress() }
                 { this.loginForm(classes) }
@@ -169,10 +167,10 @@ class SignIn extends React.Component {
                 <div className={classNames(classes.sign_in, classes.margin)}>
                   <Button color="secondary">
                     <NavLink exact to={'sign-up'} className={classes.navLink}>
-                      REGISTER
+                      REGISTRAR-SE
                     </NavLink>
                   </Button>
-                  <Button color="primary" onClick={this.authWithFirebase} disabled={isInvalid}>ENTER</Button>
+                  <Button color="primary" onClick={this.authWithFirebase} disabled={isInvalid}>ENTRAR</Button>
                 </div>
               </CardActions>
               <Paper hidden={!error} className={classNames(classes.root, classes.error)} elevation={4}>

@@ -6,7 +6,7 @@ import homeStyle from './home-style'
 import Router from '../../router/auth-router'
 import withAuthorization from '../../session/withAuthorization';
 
-import CDrawer from './drawer/drawer'
+import PAppBar from './app-bar/app-bar'
 
 class Home extends React.Component {
 
@@ -15,7 +15,7 @@ class Home extends React.Component {
 
     return (
       <div className={classes.root}>
-        <CDrawer />
+        <PAppBar />
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Router />

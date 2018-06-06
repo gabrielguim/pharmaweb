@@ -3,16 +3,18 @@ import React from 'react';
 import listItemsStyle from './list-items-style'
 
 import { withStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
-
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import CardMedia from '@material-ui/core/CardMedia';
+import Grid from '@material-ui/core/Grid';
+
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 function ListDefault(parentProps) {
@@ -20,21 +22,34 @@ function ListDefault(parentProps) {
   const classes = parentProps.classes
 
   return (
-    <GridList cols={8} spacing={32} className={classes.gridList}>
-      {list.map(item => (
-        <GridListTile key={item.code}>
-          <img src={item.imageUrl} alt={item.name} />
-          <GridListTileBar
-            title={item.name}
-            subtitle={<span>R$ {item.price}</span>}
-            actionIcon={
-              <IconButton className={classes.icon}>
-                <InfoIcon />
-              </IconButton>
-            }/>
-        </GridListTile>
+    <Grid container className={classes.gridList} spacing={32}>
+      {list.map(product => (
+        <Grid item key={product.code} xs={12} md={6} lg={3} xl={2} >
+          <Card>
+            <CardMedia
+              className={classes.media}
+              title={product.name}
+              image={product.imageUrl}
+            />
+            <CardContent>
+              <Typography gutterBottom variant="headline" component="h2">
+                {product.name}
+              </Typography>
+              <Typography component="p">
+                {product.description}
+              </Typography>
+            </CardContent>
+            <CardActions className={classes.actions}>
+              <Paper className={classes.rightItem} elevation={1}>
+                <Typography className={classes.priceText} variant="headline" component="h3">
+                  R$ { product.price }
+                </Typography>
+              </Paper>
+            </CardActions>
+          </Card>
+        </Grid>
       ))}
-    </GridList>
+    </Grid>
   );
 }
 
@@ -65,8 +80,8 @@ function CustomList(parentProps) {
 
   return (
     query
-      ? <ListWithHeader { ... parentProps } />
-      : <ListDefault { ... parentProps } />
+      ? <ListWithHeader { ...parentProps } />
+      : <ListDefault { ...parentProps } />
   );
 }
 

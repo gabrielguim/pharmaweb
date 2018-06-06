@@ -8,6 +8,15 @@ const homeStyle = theme => ({
     marginLeft: -12,
     marginRight: 20,
   },
+  pharmaLogo: {
+    marginTop: 18,
+    marginBottom: 18
+  },
+  pharmaAvatar: {
+    color: 'white',
+    margin: 10,
+    backgroundColor: "#8F1337",
+  },
   loginNavLink: {
     color: 'white',
     textDecoration: 'none'
@@ -26,55 +35,32 @@ const homeStyle = theme => ({
     overflow: 'hidden',
     position: 'relative',
     display: 'flex',
+    width: '100%',
+  },
+  appToolbar : {
+    height: 80,
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
+    position: "fixed",
+    top: 0,
+    height: 80,
+    backgroundColor: "#E86706",
     marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  leftMenuButton: {
-    marginLeft: 12,
-    marginRight: 36,
-  },
-  hide: {
-    display: 'none',
-  },
-  drawerPaper: {
-    position: 'relative',
-    whiteSpace: 'nowrap',
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerPaperClose: {
-    overflowX: 'hidden',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    width: theme.spacing.unit * 7,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9,
+    [theme.breakpoints.up('md')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
     },
   },
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
+  navIconHide: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+  toolbar: theme.mixins.toolbar,
+  drawerPaper: {
+    width: drawerWidth,
+    [theme.breakpoints.up('md')]: {
+      position: 'relative',
+    },
   },
   content: {
     flexGrow: 1,
