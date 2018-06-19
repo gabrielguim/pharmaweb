@@ -27,6 +27,8 @@ import signUpStyle from './sign-up-style'
 
 import axios from 'axios';
 
+import AuthUserContext from '../../session/auth-user-context';
+
 class SignUp extends React.Component {
 
   state = {
@@ -72,7 +74,7 @@ class SignUp extends React.Component {
     );
   };
 
-  async registerUser(history, user) {
+  async registerUser(context, history, user) {
     auth.doCheckToken().then(function(data) {
       const token = data;
 
@@ -90,8 +92,7 @@ class SignUp extends React.Component {
       axios.post('http://localhost:8081/api/users', user, headers)
         .then(response => {
           const user = response.data
-          localStorage.setItem('M', user.email);
-          localStorage.setItem('U', user.fullName);
+          context.changeUserInfo(user);
         })
         .catch(error => {
           auth.doSignOut();
@@ -100,7 +101,7 @@ class SignUp extends React.Component {
     });
   }
 
-  register = () => {
+  register = (context) => {
     const {
       fullName,
       email,
@@ -121,7 +122,7 @@ class SignUp extends React.Component {
           'fullName': fullName
         };
 
-        this.registerUser(history, user);
+        this.registerUser(context, history, user);
 
       })
       .catch(error => {
@@ -214,41 +215,47 @@ class SignUp extends React.Component {
       fullName === '';
 
     return (
-      <Grid
-        container
-        spacing={16}
-        alignItems="center"
-        direction="row"
-        justify="center">
-        <Grid item xl={2} lg={3} md={6} xs={12} >
-          <div>
-            <Card className={classes.card}>
-              <CardContent>
-                <Typography className={classes.title} color="textSecondary">
-                  REGISTRAR
-                </Typography>
-                { this.linearProgress() }
-                { this.registerForm(classes) }
-              </CardContent>
-              <CardActions>
-              <Button className={classNames(classes.margin)} color="secondary" onClick={ () => { history.push("/sign-in"); } }>
-                VOLTAR
-              </Button>
-                <div className={classNames(classes.sign_in, classes.margin)}>
-                  <Button color="primary" disabled={isInvalid} onClick={ () => { this.register() } }>
-                    REGISTRAR
-                  </Button>
-                </div>
-              </CardActions>
-              <Paper hidden={!error} className={classNames(classes.root, classes.error)} elevation={4}>
-                <Typography component="p" className={classes.error_text}>
-                  { error }
-                </Typography>
-              </Paper>
-            </Card>
-          </div>
-        </Grid>
-      </Grid>
+      <AuthUserContext.Consumer>
+        {(context) => {
+            return (
+              <Grid
+                container
+                spacing={16}
+                alignItems="center"
+                direction="row"
+                justify="center">
+                <Grid item xl={2} lg={3} md={6} xs={12} >
+                  <div>
+                    <Card className={classes.card}>
+                      <CardContent>
+                        <Typography className={classes.title} color="textSecondary">
+                          REGISTRAR
+                        </Typography>
+                        { this.linearProgress() }
+                        { this.registerForm(classes) }
+                      </CardContent>
+                      <CardActions>
+                      <Button className={classNames(classes.margin)} color="secondary" onClick={ () => { history.push("/sign-in"); } }>
+                        VOLTAR
+                      </Button>
+                        <div className={classNames(classes.sign_in, classes.margin)}>
+                          <Button color="primary" disabled={isInvalid} onClick={ () => { this.register(context) } }>
+                            REGISTRAR
+                          </Button>
+                        </div>
+                      </CardActions>
+                      <Paper hidden={!error} className={classNames(classes.root, classes.error)} elevation={4}>
+                        <Typography component="p" className={classes.error_text}>
+                          { error }
+                        </Typography>
+                      </Paper>
+                    </Card>
+                  </div>
+                </Grid>
+              </Grid>
+            )
+        }}
+      </AuthUserContext.Consumer>
     );
   }
 }

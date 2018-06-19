@@ -3,6 +3,8 @@ import React from 'react';
 import AuthUserContext from './auth-user-context';
 import { firebase } from '../firebase/firebase';
 
+import axios from 'axios';
+
 const withAuthentication = (Component) =>
   class WithAuthentication extends React.Component {
     constructor(props) {
@@ -10,34 +12,62 @@ const withAuthentication = (Component) =>
 
       this.state = {
         authUser: null,
+        userInfo: {
+          'fullName': "Usuário",
+          'email': "-",
+          'uid': "",
+          'registrationToken': "",
+          'address': "",
+          'phone': ""
+        },
+        changeUserInfo: (userInfo) => {this.setState(() => ({ userInfo: userInfo }))}
       };
     }
 
+    changeState(authUser, userInfo) {
+      this.setState(() => ({ authUser: authUser, userInfo: userInfo }))
+    }
+
     componentDidMount() {
+      const self = this;
       firebase.auth.onAuthStateChanged(authUser => {
 
         if (authUser) {
           authUser.getIdToken().then(function(data) {
             const uid = authUser.uid;
             const token = data;
+            const headers = {
+              headers: {
+                'Content-Type': 'application/json',
+                'token': token,
+                'uid': uid
+              }
+            };
 
             localStorage.setItem('I', uid);
             localStorage.setItem('F', token);
 
+            axios.get('http://localhost:8081/api/users/' + uid, headers)
+              .then(response => {
+                const user = response.data
+
+                localStorage.setItem('M', user.email);
+                localStorage.setItem('U', user.fullName);
+
+                self.changeState(authUser, user);
+              })
           });
         }
 
         authUser
-          ? this.setState(() => ({ authUser }))
+          ? this.setState(() => ({ authUser: authUser }))
           : this.setState(() => ({ authUser: null }));
       });
     }
 
     render() {
-      const { authUser } = this.state;
-
       return (
-        <AuthUserContext.Provider value={authUser}>
+        <AuthUserContext.Provider value={this.state}>
           <Component />
         </AuthUserContext.Provider>
       );
