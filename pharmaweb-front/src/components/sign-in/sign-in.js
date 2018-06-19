@@ -45,6 +45,7 @@ class SignIn extends React.Component {
 
       localStorage.setItem('I', uid);
       localStorage.setItem('F', token);
+      
     });
   }
 

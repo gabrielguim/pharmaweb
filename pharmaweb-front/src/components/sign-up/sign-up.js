@@ -88,6 +88,11 @@ class SignUp extends React.Component {
       localStorage.setItem('F', token);
 
       axios.post('http://localhost:8081/api/users', user, headers)
+        .then(response => {
+          const user = response.data
+          localStorage.setItem('M', user.email);
+          localStorage.setItem('U', user.fullName);
+        })
         .catch(error => {
           auth.doSignOut();
           history.push("/sign-in");

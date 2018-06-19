@@ -17,24 +17,25 @@ class UserService {
 
     fun register(user: User) = repository.save(user)
 
-    fun findById(userId: Long): ResponseEntity<User> {
+    fun findById(userId: String): ResponseEntity<User> {
         return repository.findById(userId).map { user ->
             ResponseEntity.ok(user)
         }.orElse(ResponseEntity.notFound().build())
     }
 
-    fun alter(userId: Long, newUser: User): ResponseEntity<User> {
+    fun alter(userId: String, newUser: User): ResponseEntity<User> {
         return repository.findById(userId).map {
             val updatedUser: User = it.copy(fullName = newUser.fullName,
                                             email = newUser.email,
-                                            address = newUser.address,
-                                            phone = newUser.phone)
+                                            address = if (newUser.address.isEmpty()) it.address else  newUser.address,
+                                            phone = if (newUser.phone.isEmpty()) it.phone else  newUser.phone,
+                                            registrationToken = if (newUser.registrationToken.isEmpty()) it.registrationToken else  newUser.registrationToken)
 
             ResponseEntity.ok().body(repository.save(updatedUser))
         }.orElse(ResponseEntity.notFound().build())
     }
 
-    fun delete(userId: Long): ResponseEntity<Void> {
+    fun delete(userId: String): ResponseEntity<Void> {
         return repository.findById(userId).map { user  ->
             repository.delete(user)
 

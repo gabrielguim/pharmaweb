@@ -16,8 +16,6 @@ import homeStyle from '../home-style'
 import { auth } from '../../../firebase/firebase';
 import PDrawer from './drawer';
 
-import axios from 'axios';
-
 class PAppBar extends React.Component {
 
   state = {
@@ -44,23 +42,9 @@ class PAppBar extends React.Component {
   }
 
   getUserData = () => {
-    const headers = {
-      headers: {
-        'Content-Type': 'application/json',
-        'token': localStorage.getItem('F'),
-        'uid': localStorage.getItem('I')
-      }
-    };
-
-    axios.get('http://localhost:8081/api/users', headers)
-      .then(res => {
-        const fullName = res.data[0].fullName;
-        const email = res.data[0].email;
-        localStorage.setItem('U', fullName);
-        localStorage.setItem('M', email);
-
-        this.setState({ fullName: fullName, email: email });
-      });
+    const fullName = localStorage.getItem('U');
+    const email = localStorage.getItem('M');
+    this.setState({ fullName: fullName, email: email });
   }
 
   render() {

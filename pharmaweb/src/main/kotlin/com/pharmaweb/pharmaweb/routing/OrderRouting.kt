@@ -16,23 +16,17 @@ class OrderRouting {
     @Autowired
     lateinit var orderService: OrderService
 
-    @Autowired
-    lateinit var productService: ProductService
-
     @GetMapping
-    fun getAll() : List<Order> {
-        for (i in 3L..15L) {
-            orderService.register(Order(customer_id = i, date = "${i}/06/2018", products = productService.getAll()))
-        }
-
-        return orderService.getAll()
-    }
+    fun getAll() : List<Order> = orderService.getAll()
 
     @PostMapping
     fun register(@Valid @RequestBody order: Order) = orderService.register(order)
 
     @GetMapping("/{id}")
     fun findById(@PathVariable(value = "id") orderId: Long) = orderService.findById(orderId)
+
+    @GetMapping("/{user_id}")
+    fun findOrderByUser(@PathVariable(value = "user_id") userId: String) = orderService.findOrderByUser(userId)
 
     @PutMapping("/{id}")
     fun alter(@PathVariable(value = "id") orderId: Long,

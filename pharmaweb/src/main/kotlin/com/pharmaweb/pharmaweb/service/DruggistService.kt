@@ -17,23 +17,24 @@ class DruggistService() {
 
     fun register(druggist: Druggist) = repository.save(druggist)
 
-    fun findById(druggistId: Long): ResponseEntity<Druggist> {
+    fun findById(druggistId: String): ResponseEntity<Druggist> {
         return repository.findById(druggistId).map { druggist ->
             ResponseEntity.ok(druggist)
         }.orElse(ResponseEntity.notFound().build())
     }
 
-    fun alter(userId: Long, newDruggist: Druggist): ResponseEntity<Druggist> {
+    fun alter(userId: String, newDruggist: Druggist): ResponseEntity<Druggist> {
         return repository.findById(userId).map {
             val updatedDruggist: Druggist = it.copy(fullName = newDruggist.fullName,
                                             email = newDruggist.email,
-                                            crf = newDruggist.crf)
+                                            crf = newDruggist.crf,
+                                            registrationToken = if (newDruggist.registrationToken.isEmpty()) it.registrationToken else  newDruggist.registrationToken)
 
             ResponseEntity.ok().body(repository.save(updatedDruggist))
         }.orElse(ResponseEntity.notFound().build())
     }
 
-    fun delete(druggistId: Long): ResponseEntity<Void> {
+    fun delete(druggistId: String): ResponseEntity<Void> {
         return repository.findById(druggistId).map { druggist  ->
             repository.delete(druggist)
 

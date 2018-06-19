@@ -5,16 +5,57 @@ import { withStyles } from '@material-ui/core/styles';
 import homeStyle from './home-style'
 import Router from '../../router/auth-router'
 import withAuthorization from '../../session/withAuthorization';
+import { messaging } from '../../firebase/firebase';
+
+import axios from 'axios';
 
 import PAppBar from './app-bar/app-bar'
 
 class Home extends React.Component {
+
+  requestPermission() {
+    if (Notification.permission !== "granted") {
+      messaging.doRequestPermission()
+        .then(() => {
+          messaging.doGetToken()
+            .then((currentToken) => {
+              console.log(currentToken);
+              const fullName = localStorage.getItem('U');
+              const email = localStorage.getItem('M');
+              const uid = localStorage.getItem('I');
+              const token = localStorage.getItem('F');
+              const data = {
+                'fullName': fullName,
+                'email': email,
+                'uid': uid,
+                'registrationToken': currentToken
+              };
+
+              const headers = {
+                headers: {
+                  'Content-Type': 'application/json',
+                  'token': token,
+                  'uid': uid
+                }
+              };
+
+              axios.put('http://localhost:8081/api/users/' + uid, data, headers)
+                .then(data => {
+                  console.log(data);
+                }).catch(err => {
+                  console.log(err);
+                })
+            })
+        })
+    }
+  }
 
   render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
+        { this.requestPermission() }
         <PAppBar />
         <main className={classes.content}>
           <div className={classes.toolbar} />

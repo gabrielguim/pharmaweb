@@ -20,13 +20,13 @@ class UserRouting {
     fun register(@Valid @RequestBody user: User) = userService.register(user)
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable(value = "id") userId: Long) = userService.findById(userId)
+    fun findById(@PathVariable(value = "id") userId: String) = userService.findById(userId)
 
     @PutMapping("/{id}")
-    fun alter(@PathVariable(value = "id") userId: Long,
+    fun alter(@PathVariable(value = "id") userId: String,
               @Valid @RequestBody newUser: User) = userService.alter(userId, newUser)
 
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable(value = "id") userId: Long) = userService.delete(userId)
+    fun delete(@PathVariable(value = "id") userId: String) = userService.delete(userId)
 
 }
