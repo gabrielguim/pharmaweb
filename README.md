@@ -27,6 +27,8 @@ Then...
 $ npm start
 ```
 
+The app will start running at <http://localhost:3000>.
+
 ## Explore Rest API  
 
 Description of the entities:
