@@ -4,15 +4,28 @@ A simple app to manage users, druggists, pharmacy, orders, products...
 ## Backlog
 https://github.com/gabrielguim/pharmaweb/wiki
 
-## Running the App
+## Running the App (Backend: pharmaweb folder)
 
 Type the following command in your terminal to run the app or simply use your IDE (IntelliJ, Eclipse...)
 
 ```bash
 $ gradle bootRun
 ```
-
 The app will start running at <http://localhost:8081>.
+
+## Running the App (Frontend: pharmaweb-front folder)
+
+Install the dependencies using
+
+```bash
+$ npm install
+```
+
+Then...
+
+```bash
+$ npm start
+```
 
 ## Explore Rest API  
 
