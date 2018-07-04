@@ -18,9 +18,12 @@ const withAuthentication = (Component) =>
           'uid': "",
           'registrationToken': "",
           'address': "",
-          'phone': ""
+          'phone': "",
+          'orders': []
         },
-        changeUserInfo: (userInfo) => {this.setState(() => ({ userInfo: userInfo }))}
+        changeUserInfo: (userInfo) => {          
+          this.setState(() => ({ userInfo: userInfo }))
+        }
       };
     }
 
@@ -30,9 +33,8 @@ const withAuthentication = (Component) =>
 
     componentDidMount() {
       const self = this;
-      firebase.auth.onAuthStateChanged(authUser => {
-
-        if (authUser) {
+      firebase.auth.onAuthStateChanged(authUser => { 
+        if (authUser) {          
           authUser.getIdToken().then(function(data) {
             const uid = authUser.uid;
             const token = data;
@@ -47,12 +49,12 @@ const withAuthentication = (Component) =>
             localStorage.setItem('I', uid);
             localStorage.setItem('F', token);
 
-            axios.get('http://localhost:8081/api/users/' + uid, headers)
+            axios.get('http://localhost:8081/api/customers/' + uid, headers)
               .then(response => {
                 const user = response.data
 
                 localStorage.setItem('M', user.email);
-                localStorage.setItem('U', user.fullName);
+                localStorage.setItem('U', user.fullName);                
 
                 self.changeState(authUser, user);
               })
@@ -61,7 +63,7 @@ const withAuthentication = (Component) =>
 
         authUser
           ? this.setState(() => ({ authUser: authUser }))
-          : this.setState(() => ({ authUser: null }));
+          : this.setState(() => ({ authUser: null }));          
       });
     }
 

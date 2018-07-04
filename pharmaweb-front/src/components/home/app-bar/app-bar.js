@@ -34,7 +34,7 @@ class PAppBar extends React.Component {
     localStorage.removeItem('I');
     localStorage.removeItem('F');
 
-    auth.doSignOut()
+    auth.doSignOut();
   };
 
   render() {
@@ -42,7 +42,7 @@ class PAppBar extends React.Component {
 
     return (
       <AuthUserContext.Consumer>
-        {(context) => {
+        {(context) => {          
           return (
             <div>
               <AppBar className={classes.appBar}>

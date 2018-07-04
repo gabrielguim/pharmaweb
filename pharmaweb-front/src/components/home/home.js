@@ -14,40 +14,33 @@ import PAppBar from './app-bar/app-bar'
 class Home extends React.Component {
 
   requestPermission() {
-    if (Notification.permission !== "granted") {
-      messaging.doRequestPermission()
-        .then(() => {
-          messaging.doGetToken()
-            .then((currentToken) => {
-              console.log(currentToken);
-              const fullName = localStorage.getItem('U');
-              const email = localStorage.getItem('M');
-              const uid = localStorage.getItem('I');
-              const token = localStorage.getItem('F');
-              const data = {
-                'fullName': fullName,
-                'email': email,
-                'uid': uid,
-                'registrationToken': currentToken
-              };
+    messaging.doRequestPermission()
+      .then(() => {        
+        messaging.doGetToken()
+          .then((currentToken) => {
+            const fullName = localStorage.getItem('U');
+            const email = localStorage.getItem('M');
+            const uid = localStorage.getItem('I');
+            const token = localStorage.getItem('F');
+            const data = {
+              'fullName': fullName,
+              'email': email,
+              'uid': uid,
+              'registrationToken': currentToken
+            };
 
-              const headers = {
-                headers: {
-                  'Content-Type': 'application/json',
-                  'token': token,
-                  'uid': uid
-                }
-              };
+            const headers = {
+              headers: {
+                'Content-Type': 'application/json',
+                'token': token,
+                'uid': uid
+              }
+            };
 
-              axios.put('http://localhost:8081/api/users/' + uid, data, headers)
-                .then(data => {
-                  console.log(data);
-                }).catch(err => {
-                  console.log(err);
-                })
-            })
-        })
-    }
+            axios.put('http://localhost:8081/api/customers/' + uid, data, headers);
+
+          })
+      })
   }
 
   render() {

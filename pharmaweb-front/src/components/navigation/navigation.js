@@ -9,7 +9,7 @@ import AuthRouter from '../../router/non-auth-router'
 
 const Navigation = (props) =>
   <AuthUserContext.Consumer>
-    {authUser => authUser
+    {context => context.authUser
       ? <NavigationAuth />
       : <NavigationNonAuth { ... props } />
     }

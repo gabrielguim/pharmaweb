@@ -74,7 +74,7 @@ class SignUp extends React.Component {
     );
   };
 
-  async registerUser(context, history, user) {
+  async registerUser(context, history, user, authUser) {
     auth.doCheckToken().then(function(data) {
       const token = data;
 
@@ -89,14 +89,20 @@ class SignUp extends React.Component {
       localStorage.setItem('I', user.uid);
       localStorage.setItem('F', token);
 
-      axios.post('http://localhost:8081/api/users', user, headers)
+      axios.post('http://localhost:8081/api/customers', user, headers)
         .then(response => {
           const user = response.data
           context.changeUserInfo(user);
         })
-        .catch(error => {
-          auth.doSignOut();
-          history.push("/sign-in");
+        .catch(error => { 
+          auth.doDeleteUser()
+            .then(function() {
+              auth.doSignOut();
+              history.push("/sign-in");
+            }).catch(function(error) {
+              auth.doSignOut();
+              history.push("/sign-in");
+            });
         });
     });
   }
@@ -122,7 +128,7 @@ class SignUp extends React.Component {
           'fullName': fullName
         };
 
-        this.registerUser(context, history, user);
+        this.registerUser(context, history, user, authUser);
 
       })
       .catch(error => {

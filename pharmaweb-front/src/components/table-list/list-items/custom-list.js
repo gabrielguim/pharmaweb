@@ -17,39 +17,79 @@ import Grid from '@material-ui/core/Grid';
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import AuthUserContext from '../../../session/auth-user-context';
+import axios from 'axios';
+
 function ListDefault(parentProps) {
   const { list } = parentProps
   const classes = parentProps.classes
 
+  const sendOrder = (user, product) => {
+    const uid = localStorage.getItem('I');
+    const token = localStorage.getItem('F');
+    
+    const order = {
+      'customer': user,
+      'date': "22/06/2018",
+      'status': "PENDENTE",
+      'products': [
+          product,
+        ]
+    };
+
+    const headers = {
+      headers: {
+        'Content-Type': 'application/json',
+        'token': token,
+        'uid': uid
+      }
+    };
+
+    axios.post('http://localhost:8081/api/orders', order, headers)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {          
+        console.log(error);
+      });
+  }
+
   return (
-    <Grid container className={classes.gridList} spacing={32}>
-      {list.map(product => (
-        <Grid item key={product.code} xs={12} md={6} lg={3} xl={2} >
-          <Card>
-            <CardMedia
-              className={classes.media}
-              title={product.name}
-              image={product.imageUrl}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="headline" component="h2">
-                {product.name}
-              </Typography>
-              <Typography component="p">
-                {product.description}
-              </Typography>
-            </CardContent>
-            <CardActions className={classes.actions}>
-              <Paper className={classes.rightItem} elevation={1}>
-                <Typography className={classes.priceText} variant="headline" component="h3">
-                  R$ { product.price }
-                </Typography>
-              </Paper>
-            </CardActions>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
+    <AuthUserContext.Consumer>
+      {(context) => {
+        return (
+          <Grid container className={classes.gridList} spacing={32}>
+            {list.map(product => (
+              <Grid item key={product.code} xs={12} md={6} lg={3} xl={2} >
+                <Card>
+                  <CardMedia
+                    className={classes.media}
+                    title={product.name}
+                    image={product.imageUrl}
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="headline" component="h2">
+                      {product.name}
+                    </Typography>
+                    <Typography component="p">
+                      {product.description}
+                    </Typography>
+                  </CardContent>
+                  <CardActions className={classes.actions}>
+                    <Paper className={classes.rightItem} elevation={1} onClick={() => sendOrder(context.userInfo, product) }>
+                      <Typography className={classes.priceText} variant="headline" component="h3">
+                        R$ { product.price }
+                      </Typography>
+                    </Paper>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        )
+      }
+    }
+    </AuthUserContext.Consumer>
   );
 }
 
