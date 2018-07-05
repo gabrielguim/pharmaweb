@@ -22,7 +22,7 @@ class ProductRouting {
 
         // Product Mock
         val products: MutableList<Product> = mutableListOf()
-        for (i in 0..100) {
+        for (i in 0..30) {
             val dep = (1..10).random()
             val cat = (1..10).random()
             productService.register(Product("${i}", "name ${i}", "desc ${i}",

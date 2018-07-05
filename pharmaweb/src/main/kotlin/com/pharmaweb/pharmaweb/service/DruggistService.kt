@@ -23,8 +23,8 @@ class DruggistService() {
         }.orElse(ResponseEntity.notFound().build())
     }
 
-    fun alter(userId: String, newDruggist: Druggist): ResponseEntity<Druggist> {
-        return repository.findById(userId).map {
+    fun alter(druggistId: String, newDruggist: Druggist): ResponseEntity<Druggist> {
+        return repository.findById(druggistId).map {
             val updatedDruggist: Druggist = it.copy(fullName = newDruggist.fullName,
                                             email = newDruggist.email,
                                             crf = newDruggist.crf,

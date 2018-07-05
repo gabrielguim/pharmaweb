@@ -1,7 +1,6 @@
 package com.pharmaweb.pharmaweb.service
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.google.api.client.json.Json
 import com.pharmaweb.pharmaweb.model.Order
 import com.pharmaweb.pharmaweb.repository.OrderRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,7 +11,8 @@ import org.springframework.transaction.annotation.Transactional
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.Message
 import com.google.firebase.messaging.Notification
-
+import com.pharmaweb.pharmaweb.model.Customer
+import com.pharmaweb.pharmaweb.repository.CustomerRepository
 
 @Service
 class OrderService() {
@@ -26,13 +26,13 @@ class OrderService() {
     fun register(order: Order) {
         val mapper = jacksonObjectMapper()
 
-        val message = Message.builder()
-                .setNotification(Notification("Titulo", "Body"))
-                .putData("order", mapper.writeValueAsString(order))
-                .setToken(order.customer.registrationToken)
-                .build()
+        FirebaseMessaging.getInstance().subscribeToTopic(listOf(order.customer.registrationToken), "/topics/order")
 
-        FirebaseMessaging.getInstance().send(message)
+        val message = Message.builder()
+                .setNotification(Notification("Pharmaweb - Novo Pedido!", "Um novo pedido foi efetuado"))
+                .putData("order", mapper.writeValueAsString(order))
+                .setTopic("orders")
+                .build()
 
         FirebaseMessaging.getInstance().send(message)
 
@@ -46,10 +46,10 @@ class OrderService() {
         }.orElse(ResponseEntity.notFound().build())
     }
 
-    fun findOrderByUser(userId: String) : ResponseEntity<Order> {
+    fun findOrderByCustomer(customerId: String) : ResponseEntity<Order> {
         val orders = getAll()
         for (order in orders) {
-            if (order.customer.uid.equals(userId)) {
+            if (order.customer.uid.equals(customerId)) {
                 return ResponseEntity.ok().body(order)
             }
         }

@@ -1,12 +1,11 @@
 package com.pharmaweb.pharmaweb.model
 
-import javax.persistence.Entity
-import javax.persistence.Id
+import javax.persistence.*
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 
-@Entity(name = "user")
-data class User(
+@Entity(name = "customer")
+data class Customer(
 
         @Id
         @get: NotBlank
@@ -22,6 +21,15 @@ data class User(
 
         val address: String = "",
 
-        val phone: String = ""
+        val phone: String = "",
 
-)
+        @OneToMany(
+                cascade = [CascadeType.ALL],
+                orphanRemoval = true,
+                mappedBy="customer"
+        )
+        val orders: List<Order> = listOf()
+
+) {
+        private constructor() : this("", "", "")
+}

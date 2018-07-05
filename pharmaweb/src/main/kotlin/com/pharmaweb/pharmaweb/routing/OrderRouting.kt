@@ -16,6 +16,9 @@ class OrderRouting {
     @Autowired
     lateinit var orderService: OrderService
 
+    @Autowired
+    lateinit var productService: ProductService
+
     @GetMapping
     fun getAll() : List<Order> = orderService.getAll()
 
@@ -25,8 +28,8 @@ class OrderRouting {
     @GetMapping("/{id}")
     fun findById(@PathVariable(value = "id") orderId: Long) = orderService.findById(orderId)
 
-    @GetMapping("/{user_id}")
-    fun findOrderByUser(@PathVariable(value = "user_id") userId: String) = orderService.findOrderByUser(userId)
+    @GetMapping("/{customer_id}")
+    fun findOrderByCustomer(@PathVariable(value = "customer_id") customerId: String) = orderService.findOrderByCustomer(customerId)
 
     @PutMapping("/{id}")
     fun alter(@PathVariable(value = "id") orderId: Long,

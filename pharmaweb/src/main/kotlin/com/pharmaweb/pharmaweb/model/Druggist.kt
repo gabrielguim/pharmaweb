@@ -23,4 +23,6 @@ data class Druggist(
 
         val registrationToken: String = ""
 
-)
+) {
+    private constructor() : this("", "", "", "", "")
+}

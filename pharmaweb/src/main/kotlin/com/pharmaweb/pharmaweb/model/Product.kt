@@ -28,4 +28,6 @@ data class Product(
         @get: PositiveOrZero
         val price: Float = 0f
 
-)
+) {
+        private constructor() : this("", "", "", "", "", "", 0f)
+}
