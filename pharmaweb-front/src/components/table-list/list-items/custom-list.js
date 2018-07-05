@@ -16,6 +16,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import AddShoppingCart from '@material-ui/icons/AddShoppingCart';
 
 import AuthUserContext from '../../../session/auth-user-context';
 import axios from 'axios';
@@ -23,36 +24,6 @@ import axios from 'axios';
 function ListDefault(parentProps) {
   const { list } = parentProps
   const classes = parentProps.classes
-
-  const sendOrder = (user, product) => {
-    const uid = localStorage.getItem('I');
-    const token = localStorage.getItem('F');
-    
-    const order = {
-      'customer': user,
-      'date': "22/06/2018",
-      'status': "PENDENTE",
-      'products': [
-          product,
-        ]
-    };
-
-    const headers = {
-      headers: {
-        'Content-Type': 'application/json',
-        'token': token,
-        'uid': uid
-      }
-    };
-
-    axios.post('http://localhost:8081/api/orders', order, headers)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {          
-        console.log(error);
-      });
-  }
 
   return (
     <AuthUserContext.Consumer>
@@ -76,9 +47,16 @@ function ListDefault(parentProps) {
                     </Typography>
                   </CardContent>
                   <CardActions className={classes.actions}>
-                    <Paper className={classes.rightItem} elevation={1} onClick={() => sendOrder(context.userInfo, product) }>
+                    <Paper className={classes.rightItem} elevation={1}>
                       <Typography className={classes.priceText} variant="headline" component="h3">
                         R$ { product.price }
+                      </Typography>
+                    </Paper>
+                  </CardActions>
+                  <CardActions className={classes.actions}>
+                    <Paper className={classes.cartItem} elevation={1} onClick={() => context.addToCart(product) }>
+                      <Typography className={classes.priceText} variant="headline" component="h3">
+                        <AddShoppingCart />
                       </Typography>
                     </Paper>
                   </CardActions>

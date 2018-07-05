@@ -12,17 +12,31 @@ const withAuthentication = (Component) =>
 
       this.state = {
         authUser: null,
+        notifications: [],
+        cart: [],
         userInfo: {
           'fullName': "Usuário",
           'email': "-",
           'uid': "",
           'registrationToken': "",
           'address': "",
-          'phone': "",
-          'orders': []
+          'phone': ""
         },
         changeUserInfo: (userInfo) => {          
           this.setState(() => ({ userInfo: userInfo }))
+        },
+        addToCart: (product) => {
+          this.setState(() => ({ cart: [...this.state.cart, product]}))
+        },
+        clearCart: () => {
+          this.setState(() => ({ cart: [] }))
+        },
+        updateNotifications: (notification) => {
+          this.setState(() => (
+            this.state.notifications.includes(notification)
+              ? { notifications: [...this.state.notifications] }
+              : { notifications: [...this.state.notifications, notification] }
+          ))
         }
       };
     }

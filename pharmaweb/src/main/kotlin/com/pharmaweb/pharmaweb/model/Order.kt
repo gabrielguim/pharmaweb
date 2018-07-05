@@ -9,18 +9,20 @@ data class Order(
 
         var status: String = "",
 
-        @OneToMany(
-            cascade = [CascadeType.ALL],
-            orphanRemoval = true
-        )
+        @ManyToMany(
+                cascade = [CascadeType.REFRESH, CascadeType.MERGE],
+                fetch = FetchType.LAZY)
+        @JoinTable(
+                name = "ORDER_PRODUCTS",
+                joinColumns = [JoinColumn(name = "ORDER_ID")],
+                inverseJoinColumns = [JoinColumn(name = "PRODUCT_ID")])
         val products: List<Product> = listOf(),
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name="customer_id")
+        @OneToOne
         val customer: Customer = Customer(),
 
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @GeneratedValue(strategy = GenerationType.AUTO)
         val id: Long = 0
 
 ) {

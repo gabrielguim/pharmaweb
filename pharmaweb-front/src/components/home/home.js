@@ -27,7 +27,7 @@ class Home extends React.Component {
               'email': email,
               'uid': uid,
               'registrationToken': currentToken
-            };
+            };            
 
             const headers = {
               headers: {

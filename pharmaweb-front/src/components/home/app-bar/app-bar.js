@@ -83,11 +83,11 @@ class PAppBar extends React.Component {
                   ModalProps={{
                     keepMounted: false, // Better open performance on mobile.
                   }}>
-                  <PDrawer state={this.state} classes={classes} />
+                  <PDrawer state={this.state} classes={classes} context={context}/>
                 </Drawer>
               </Hidden>
               <Hidden smDown implementation="css">
-                <PDrawer state={this.state} classes={classes} />
+                <PDrawer state={this.state} classes={classes} context={context} />
               </Hidden>
             </div>
           );

@@ -11,7 +11,7 @@ const auth = firebase.auth();
 const messaging = firebase.messaging();
 messaging.usePublicVapidKey(config.vapidKey);
 
-navigator.serviceWorker.register('service-worker.js')
+navigator.serviceWorker.register(`${process.env.PUBLIC_URL}/firebase-messaging-sw.js`)
   .then((registration) => {
     messaging.useServiceWorker(registration);
   });

@@ -21,14 +21,7 @@ data class Customer(
 
         val address: String = "",
 
-        val phone: String = "",
-
-        @OneToMany(
-                cascade = [CascadeType.ALL],
-                orphanRemoval = true,
-                mappedBy="customer"
-        )
-        val orders: List<Order> = listOf()
+        val phone: String = ""
 
 ) {
         private constructor() : this("", "", "")

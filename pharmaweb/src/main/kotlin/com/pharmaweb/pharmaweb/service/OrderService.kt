@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.Message
 import com.google.firebase.messaging.Notification
-import com.pharmaweb.pharmaweb.model.Customer
-import com.pharmaweb.pharmaweb.repository.CustomerRepository
+import com.pharmaweb.pharmaweb.PharmawebApplication
+import org.slf4j.LoggerFactory
 
 @Service
 class OrderService() {
@@ -26,18 +26,16 @@ class OrderService() {
     fun register(order: Order) {
         val mapper = jacksonObjectMapper()
 
-        FirebaseMessaging.getInstance().subscribeToTopic(listOf(order.customer.registrationToken), "/topics/order")
+        repository.save(order)
 
         val message = Message.builder()
                 .setNotification(Notification("Pharmaweb - Novo Pedido!", "Um novo pedido foi efetuado"))
                 .putData("order", mapper.writeValueAsString(order))
-                .setTopic("orders")
+                .setToken(order.customer.registrationToken)
                 .build()
 
-        FirebaseMessaging.getInstance().send(message)
-
         // send notification
-        repository.save(order)
+        FirebaseMessaging.getInstance().send(message)
     }
 
     fun findById(orderId: Long): ResponseEntity<Order> {
