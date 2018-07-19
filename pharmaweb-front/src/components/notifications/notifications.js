@@ -1,16 +1,12 @@
 import React from "react";
 import withAuthorization from '../../session/withAuthorization';
-import AuthUserContext from "../../session/auth-user-context";
 
+import NotificationList from './notification-list';
 
 class Notifications extends React.Component {
   render() {
     return (
-      <AuthUserContext.Consumer>
-        {(context) => {
-          // TODO: =D
-        }}
-      </AuthUserContext.Consumer>
+      <NotificationList />
     );
   }
 }

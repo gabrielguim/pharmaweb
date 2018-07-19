@@ -12,7 +12,26 @@ const withAuthentication = (Component) =>
 
       this.state = {
         authUser: null,
-        notifications: [],
+        notifications: [
+          { 
+            code: 1,
+            from: "GABRIEL",
+            message: "ME DA REMEDIO",
+            viewed: false
+          },
+          { 
+            code: 2,
+            from: "GABRIEL2",
+            message: "ME DA REMEDIO",
+            viewed: false
+          },
+          { 
+            code: 3,
+            from: "GABRIEL3",
+            message: "ME DA REMEDIO",
+            viewed: false
+          }
+        ],
         cart: [],
         userInfo: {
           'fullName': "Usuário",
