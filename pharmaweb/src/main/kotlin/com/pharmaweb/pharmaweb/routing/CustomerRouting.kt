@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("/customers")
 class CustomerRouting {
 
     @Autowired

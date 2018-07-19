@@ -19,16 +19,15 @@ class ProductService() {
                 Random().nextInt(endInclusive - start) +  start
 
         // Product Mock
-        val products: MutableList<Product> = mutableListOf()
         for (i in 0..30) {
             val dep = (1..10).random()
             val cat = (1..10).random()
-            repository.save(Product("${i}", "name ${i}", "desc ${i}",
+            register(Product("${i}", "name ${i}", "desc ${i}",
                     "https://i0.wp.com/farmaceuticodigital.com/wp-content/uploads/2016/05/medicamentos2.jpg",
                     "dep ${dep}", "cat ${cat}", i * 1f))
         }
 
-        return products;
+        return repository.findAll().toList();
     }
 
     fun register(product: Product) = repository.save(product)
