@@ -20,13 +20,13 @@ class DruggistRouting {
     fun register(@Valid @RequestBody druggist: Druggist) = druggistService.register(druggist)
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable(value = "id") druggistId: Long) = druggistService.findById(druggistId)
+    fun findById(@PathVariable(value = "id") druggistId: String) = druggistService.findById(druggistId)
 
     @PutMapping("/{id}")
-    fun alter(@PathVariable(value = "id") druggistId: Long,
+    fun alter(@PathVariable(value = "id") druggistId: String,
               @Valid @RequestBody newDruggist: Druggist) = druggistService.alter(druggistId, newDruggist)
 
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable(value = "id") druggistId: Long) = druggistService.delete(druggistId)
+    fun delete(@PathVariable(value = "id") druggistId: String) = druggistService.delete(druggistId)
 
 }

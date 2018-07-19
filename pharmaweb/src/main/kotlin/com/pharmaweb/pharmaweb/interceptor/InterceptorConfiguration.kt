@@ -20,7 +20,7 @@ class InterceptorConfiguration: WebMvcConfigurer {
 
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/api/**")
-                .allowedOrigins("*")
+                .allowedOrigins("http://localhost:3000")
                 .allowedMethods("POST", "GET",  "PUT", "OPTIONS", "DELETE")
     }
 

@@ -33,9 +33,10 @@ The app will start running at <http://localhost:3000>.
 
 Description of the entities:
 
-    Entity: { name: User, endpoint: users }
+    Entity: { name: Customer, endpoint: customers }
     Entity: { name: Druggist, endpoint: druggists }
     Entity: { name: Product, endpoint: products }
+    Entity: { name: Order, endpoint: orders }
 
 The app defines following CRUD APIs.
 

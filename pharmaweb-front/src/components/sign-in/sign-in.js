@@ -38,13 +38,13 @@ class SignIn extends React.Component {
   };
 
   async getAsyncToken(user) {
-    console.log(user);
     auth.doCheckToken().then(function(data) {
       const uid = user.uid;
       const token = data;
 
       localStorage.setItem('I', uid);
       localStorage.setItem('F', token);
+
     });
   }
 

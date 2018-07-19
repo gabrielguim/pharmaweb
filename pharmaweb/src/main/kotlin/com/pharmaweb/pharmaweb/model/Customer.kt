@@ -1,19 +1,13 @@
 package com.pharmaweb.pharmaweb.model
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 
-@Entity(name = "user")
-data class User(
+@Entity(name = "customer")
+data class Customer(
 
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long = 0,
-
         @get: NotBlank
         val uid: String  = "",
 
@@ -23,8 +17,12 @@ data class User(
         @get: Email
         val email: String = "",
 
+        val registrationToken: String = "",
+
         val address: String = "",
 
         val phone: String = ""
 
-)
+) {
+        private constructor() : this("", "", "")
+}

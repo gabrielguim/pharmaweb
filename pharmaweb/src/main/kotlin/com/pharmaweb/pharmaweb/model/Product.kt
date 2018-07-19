@@ -1,7 +1,6 @@
 package com.pharmaweb.pharmaweb.model
 
-import javax.persistence.Entity
-import javax.persistence.Id
+import javax.persistence.*
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.PositiveOrZero
 
@@ -29,4 +28,6 @@ data class Product(
         @get: PositiveOrZero
         val price: Float = 0f
 
-)
+) {
+        private constructor() : this("", "", "", "", "", "", 0f)
+}

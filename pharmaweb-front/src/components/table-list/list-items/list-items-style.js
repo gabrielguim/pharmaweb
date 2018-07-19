@@ -15,6 +15,14 @@ const listItemsStyle = theme => ({
   actions: {
     display: 'flex',
   },
+  cartItem: {
+    marginLeft: 'auto',
+    paddingTop: 10,
+    paddingBottom: 0,
+    paddingLeft: 30,
+    paddingRight: 30,
+    backgroundColor: "#8F1337"
+  },
   rightItem: {
     marginLeft: 'auto',
     paddingTop: 5,
