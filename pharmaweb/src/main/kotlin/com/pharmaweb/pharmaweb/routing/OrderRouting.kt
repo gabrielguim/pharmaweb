@@ -10,7 +10,7 @@ import java.util.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/api/orders")
+@RequestMapping("/orders")
 class OrderRouting {
 
     @Autowired
