@@ -15,23 +15,7 @@ class ProductRouting {
     lateinit var productService: ProductService
 
     @GetMapping
-    fun getAll() : List<Product> {
-
-        fun ClosedRange<Int>.random() =
-                Random().nextInt(endInclusive - start) +  start
-
-        // Product Mock
-        val products: MutableList<Product> = mutableListOf()
-        for (i in 0..30) {
-            val dep = (1..10).random()
-            val cat = (1..10).random()
-            productService.register(Product("${i}", "name ${i}", "desc ${i}",
-                    "https://media.alienwarearena.com/media/1327-a.jpg",
-                    "dep ${dep}", "cat ${cat}", i * 1f))
-        }
-
-        return productService.getAll()
-    }
+    fun getAll() = productService.getAll()
 
     @PostMapping
     fun register(@Valid @RequestBody product: Product) = productService.register(product)
