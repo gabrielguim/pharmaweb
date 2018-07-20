@@ -44,15 +44,20 @@ class OrderService() {
         }.orElse(ResponseEntity.notFound().build())
     }
 
-    fun findOrderByCustomer(customerId: String) : ResponseEntity<Order> {
+    fun findOrderByCustomer(customerId: String) : ResponseEntity<List<Order>> {
+        val customerOrders: MutableList<Order> = mutableListOf()
         val orders = getAll()
         for (order in orders) {
             if (order.customer.uid.equals(customerId)) {
-                return ResponseEntity.ok().body(order)
+                customerOrders.add(order);
             }
         }
 
-        return ResponseEntity.notFound().build()
+        if (customerOrders.isEmpty()) {
+            return ResponseEntity.notFound().build()
+        } else {
+            return ResponseEntity.ok().body(customerOrders.toList());
+        }
     }
 
     fun alter(orderId: Long, newOrder: Order): ResponseEntity<Order> {
