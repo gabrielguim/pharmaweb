@@ -11,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.Message
 import com.google.firebase.messaging.Notification
-import com.pharmaweb.pharmaweb.PharmawebApplication
-import org.slf4j.LoggerFactory
 
 @Service
 class OrderService() {
