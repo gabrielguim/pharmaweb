@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class ProductService() {
+class ProductService {
 
     @Autowired
-    lateinit private var repository: ProductRepository
+    private lateinit var repository: ProductRepository
 
     fun getAll() : List<Product> {
         fun ClosedRange<Int>.random() =
@@ -22,12 +22,12 @@ class ProductService() {
         for (i in 0..30) {
             val dep = (1..10).random()
             val cat = (1..10).random()
-            register(Product("${i}", "name ${i}", "desc ${i}",
+            register(Product("$i", "name $i", "desc $i",
                     "https://i0.wp.com/farmaceuticodigital.com/wp-content/uploads/2016/05/medicamentos2.jpg",
-                    "dep ${dep}", "cat ${cat}", i * 1f))
+                    "dep $dep", "cat $cat", i * 1f))
         }
 
-        return repository.findAll().toList();
+        return repository.findAll().toList()
     }
 
     fun register(product: Product) = repository.save(product)
@@ -35,7 +35,7 @@ class ProductService() {
     fun searchByText(textToSeach: String) = repository.searchByText(textToSeach)
 
     fun groupBy(group: String) = repository.findAll().groupBy {
-        if (group.equals("category")) { it.category }
+        if (group == "category") { it.category }
         else { it.department }
     }
 

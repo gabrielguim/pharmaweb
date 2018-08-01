@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service
 class CustomerService {
 
     @Autowired
-    lateinit private var repository: CustomerRepository
+    private lateinit var repository: CustomerRepository
 
     fun getAll() = repository.findAll().toList()
 

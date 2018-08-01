@@ -1,7 +1,7 @@
 package com.pharmaweb.pharmaweb.interceptor
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
@@ -15,7 +15,7 @@ class InterceptorConfiguration: WebMvcConfigurer {
     lateinit var appInterceptor: AppInterceptor
 
     override fun addInterceptors(registry: InterceptorRegistry) {
-        registry.addInterceptor(appInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(appInterceptor).addPathPatterns("/**")
     }
 
     override fun addCorsMappings(registry: CorsRegistry) {

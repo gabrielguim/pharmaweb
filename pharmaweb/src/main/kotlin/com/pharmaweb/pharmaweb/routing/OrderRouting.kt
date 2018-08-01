@@ -1,14 +1,11 @@
 package com.pharmaweb.pharmaweb.routing
 
 import com.pharmaweb.pharmaweb.model.Order
-import com.pharmaweb.pharmaweb.model.Product
 import com.pharmaweb.pharmaweb.service.OrderService
-import com.pharmaweb.pharmaweb.service.ProductService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
-import java.util.*
 import javax.validation.Valid
 
 @RestController

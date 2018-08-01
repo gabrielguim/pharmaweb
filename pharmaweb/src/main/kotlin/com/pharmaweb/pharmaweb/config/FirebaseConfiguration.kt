@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.Resource
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.firebase.FirebaseOptions
-import com.pharmaweb.pharmaweb.interceptor.AppInterceptor
 import org.slf4j.LoggerFactory
 import org.springframework.core.io.ClassPathResource
 
@@ -20,7 +19,7 @@ class FirebaseConfiguration {
 
         val logger = LoggerFactory.getLogger(FirebaseConfiguration::class.java)
 
-        val resource: Resource = ClassPathResource("/pharmaweb-firebase-key.json");
+        val resource: Resource = ClassPathResource("/pharmaweb-firebase-key.json")
 
         val options = FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(resource.inputStream))

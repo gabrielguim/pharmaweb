@@ -11,14 +11,12 @@ import org.springframework.transaction.annotation.Transactional
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.Message
 import com.google.firebase.messaging.Notification
-import com.pharmaweb.pharmaweb.PharmawebApplication
-import org.slf4j.LoggerFactory
 
 @Service
-class OrderService() {
+class OrderService {
 
     @Autowired
-    lateinit private var repository: OrderRepository
+    private lateinit var repository: OrderRepository
 
     fun getAll() = repository.findAll().toList()
 
@@ -48,15 +46,15 @@ class OrderService() {
         val customerOrders: MutableList<Order> = mutableListOf()
         val orders = getAll()
         for (order in orders) {
-            if (order.customer.uid.equals(customerId)) {
-                customerOrders.add(order);
+            if (order.customer.uid == customerId) {
+                customerOrders.add(order)
             }
         }
 
-        if (customerOrders.isEmpty()) {
-            return ResponseEntity.notFound().build()
+        return if (customerOrders.isEmpty()) {
+            ResponseEntity.notFound().build()
         } else {
-            return ResponseEntity.ok().body(customerOrders.toList());
+            ResponseEntity.ok().body(customerOrders.toList())
         }
     }
 

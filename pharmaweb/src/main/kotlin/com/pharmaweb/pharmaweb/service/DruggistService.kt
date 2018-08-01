@@ -8,10 +8,10 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
-class DruggistService() {
+class DruggistService {
 
     @Autowired
-    lateinit private var repository: DruggistRepository
+    private lateinit var repository: DruggistRepository
 
     fun getAll() = repository.findAll().toList()
 
