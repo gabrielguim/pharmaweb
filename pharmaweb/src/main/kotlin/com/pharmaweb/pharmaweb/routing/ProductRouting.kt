@@ -2,52 +2,47 @@ package com.pharmaweb.pharmaweb.routing
 
 import com.pharmaweb.pharmaweb.model.Product
 import com.pharmaweb.pharmaweb.service.ProductService
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.util.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/products")
+@Api(value = "Product Endpoint", description = "Product CRUD operations")
 class ProductRouting {
 
     @Autowired
     lateinit var productService: ProductService
 
+    @ApiOperation(value = "Returns all the registered products")
     @GetMapping
-    fun getAll() : List<Product> {
+    fun getAll() = productService.getAll()
 
-        fun ClosedRange<Int>.random() =
-                Random().nextInt(endInclusive - start) +  start
-
-        // Product Mock
-        for (i in 0..30) {
-            val dep = (1..10).random()
-            val cat = (1..10).random()
-            productService.register(Product("${i}", "name ${i}", "desc ${i}",
-                    "https://media.alienwarearena.com/media/1327-a.jpg",
-                    "dep ${dep}", "cat ${cat}", i * 1f))
-        }
-
-        return productService.getAll()
-    }
-
+    @ApiOperation(value = "Registers a new given product")
     @PostMapping
     fun register(@Valid @RequestBody product: Product) = productService.register(product)
 
+    @ApiOperation(value = "Returns a list of products that have in their attributes the given text")
     @GetMapping("/")
     fun searchByText(@RequestParam("q") textToSearch: String) = productService.searchByText("%${textToSearch.toLowerCase()}%")
 
+    @ApiOperation(value = "Returns a list of grouped products, it can be by category or department")
     @GetMapping("/group/")
     fun groupBy(@RequestParam("by") group: String) = productService.groupBy(group)
 
+    @ApiOperation(value = "Returns a single product that has the given id")
     @GetMapping("/{id}")
     fun findById(@PathVariable(value = "id") productId: String) = productService.findById(productId)
 
+    @ApiOperation(value = "Alters a single product using the new given product that has the given id")
     @PutMapping("/{id}")
     fun alter(@PathVariable(value = "id") productId: String,
               @Valid @RequestBody newProduct: Product) = productService.alter(productId, newProduct)
 
+    @ApiOperation(value = "Deletes a single product that has the given id")
     @DeleteMapping("/{id}")
     fun delete(@PathVariable(value = "id") productId: String) = productService.delete(productId)
 

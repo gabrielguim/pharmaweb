@@ -15,11 +15,11 @@ class InterceptorConfiguration: WebMvcConfigurer {
     lateinit var appInterceptor: AppInterceptor
 
     override fun addInterceptors(registry: InterceptorRegistry) {
-        registry.addInterceptor(appInterceptor).addPathPatterns("/api/**");
+        registry.addInterceptor(appInterceptor).addPathPatterns("/**");
     }
 
     override fun addCorsMappings(registry: CorsRegistry) {
-        registry.addMapping("/api/**")
+        registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
                 .allowedMethods("POST", "GET",  "PUT", "OPTIONS", "DELETE")
     }

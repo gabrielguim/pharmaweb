@@ -50,8 +50,4 @@ The app defines following CRUD APIs.
 
     DELETE /api/[entity.endpoint]/{id}
     
-The app defines also search API for Product
-
-    GET /api/products/?q={text}
-
-You can test them using Postman or any other rest client.
+For detailed information about the API, please check out: [API Docs](https://gabrielguim.github.io/pharmaweb/api_docs.html)

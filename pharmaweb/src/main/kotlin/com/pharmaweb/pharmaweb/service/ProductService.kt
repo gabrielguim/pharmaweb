@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class ProductService() {
@@ -13,7 +14,21 @@ class ProductService() {
     @Autowired
     lateinit private var repository: ProductRepository
 
-    fun getAll() = repository.findAll().toList()
+    fun getAll() : List<Product> {
+        fun ClosedRange<Int>.random() =
+                Random().nextInt(endInclusive - start) +  start
+
+        // Product Mock
+        for (i in 0..30) {
+            val dep = (1..10).random()
+            val cat = (1..10).random()
+            register(Product("${i}", "name ${i}", "desc ${i}",
+                    "https://i0.wp.com/farmaceuticodigital.com/wp-content/uploads/2016/05/medicamentos2.jpg",
+                    "dep ${dep}", "cat ${cat}", i * 1f))
+        }
+
+        return repository.findAll().toList();
+    }
 
     fun register(product: Product) = repository.save(product)
 
