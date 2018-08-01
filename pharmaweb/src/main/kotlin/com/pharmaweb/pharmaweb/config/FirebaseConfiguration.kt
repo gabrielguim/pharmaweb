@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.Resource
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.firebase.FirebaseOptions
-import com.pharmaweb.pharmaweb.interceptor.AppInterceptor
 import org.slf4j.LoggerFactory
 import org.springframework.core.io.ClassPathResource
 
@@ -25,6 +24,7 @@ class FirebaseConfiguration {
         val options = FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(resource.inputStream))
                 .setDatabaseUrl("https://pharmaweb-35ccb.firebaseio.com")
+                .setStorageBucket("gs://pharmaweb-35ccb.appspot.com")
                 .build()
 
         logger.info("INIT FIREBASE WITH URL = " + options.databaseUrl)

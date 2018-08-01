@@ -21,7 +21,6 @@ class ProductRouting {
                 Random().nextInt(endInclusive - start) +  start
 
         // Product Mock
-        val products: MutableList<Product> = mutableListOf()
         for (i in 0..30) {
             val dep = (1..10).random()
             val cat = (1..10).random()
